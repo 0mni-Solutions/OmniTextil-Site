@@ -1,0 +1,658 @@
+/* IMPORT DE FONTES */
+@font-face {
+  font-family: Quicksand_Light;
+  src: url(../assets/fonts/Quicksand_Light.otf);
+}
+@font-face {
+  font-family: Quicksand_Book;
+  src: url(../assets/fonts/Quicksand_Book.otf);
+}
+@font-face {
+  font-family: Quicksand_Bold;
+  src: url(../assets/fonts/Quicksand_Bold.otf);
+}
+
+/* CONFIGURAÇÕES DO BODY */
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-family: Quicksand_Book;
+  background-size: cover;
+  background-color: #F0E1FF;
+}
+
+/* CONTAINER PARA RESPIRO (MARGEM) DA PÁGINA */
+.container {
+  /* border: 3px solid red; */
+  width: 90%;
+  height: 100%;
+  display: flex;
+}
+
+/* ESTILO DE SPAN PARA FONTES */
+.font-stylish {
+  font-family: Quicksand_Bold;
+}
+
+/* HEADER */
+.header {
+  /* background-image: url(../assets/imgs/header-footer/header.png); */
+  height: 90px;
+  width: 100%;
+  font-size: 17px;
+  display: flex;
+}
+
+/* NAVBAR ESTÁTICO */
+.navmask {
+  position: fixed;
+  top: 0;
+  backdrop-filter: blur(3px);
+}
+
+/* CONFIGURAÇÕES DO CONTAINER DO HEADER */
+.header .container {
+  justify-content: space-between;
+  height: 100%;
+  margin: auto;
+  align-items: center;
+}
+
+/* LOGO DO HEADER */
+.header img {
+  height: 58%;
+}
+
+.href-title {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* NAVBAR DO HEADER ESPECIFICAMENTE */
+.navbar-header {
+  display: flex;
+  list-style: none;
+  justify-content: space-evenly;
+  padding: 0;
+  width: 600px;
+  align-items: center;
+  flex-flow: row wrap;
+}
+/* SEPARADOR DOS ITENS (LINHA - TAG HR) */
+.navbar-header hr {
+  height: 20px;
+  width: 1px;
+  border: 0;
+  margin: 0;
+}
+/* OPÇÃO DE REDIRECIONAMENTO  */
+.navbar-header a {
+  text-decoration: none;
+}
+/* ÍCONE DE TEMA */
+.navbar-header img {
+  cursor: pointer;
+}
+
+/* DECORAÇÃO DE TEXTO PARA INDICAR EM QUE PÁGINA O USUÁRIO ESTÁ */
+.page-selected {
+  text-decoration: underline;
+  font-family: Quicksand_Bold;
+  font-weight: 1000;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* FOOTER */
+.footer {
+  width: 100%;
+  height: 100px;
+  padding: 0.8%;
+  display: flex;
+  align-self: end;
+  justify-content: center;
+  backdrop-filter: blur(3px);
+  font-size: 16px;
+}
+
+/* CONFIGURAÇÕES DO CONTAINER DO FOOTER */
+.footer .container {
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* BLOCO DE INFORMAÇÃO PADRÃO DO FOOTER */
+.footer .box {
+  width: 18%;
+}
+
+/* ESTILIZAÇÃO ESPECÍFICA DO BLOCO DE REPORT */
+.footer .reports {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* IMAGEM LUPA DA BOX REPORT */
+.reports img {
+  height: 20px;
+}
+
+/* TEXTO DA BOX REPORT */
+.reports p {
+  margin: 0;
+}
+
+/* ESTILIZAÇÃO ESPECÍFICA DO BLOCO DE CONTATO */
+.contato {
+  flex-flow: row wrap;
+  text-align: center;
+}
+
+/* TÍTULO DO BLOCO CONTATO */
+.contato h4 {
+  margin: 0;
+}
+
+/* LINHA DE SEPARAÇÃO */
+.contato hr {
+  margin-top: 0;
+  width: 100%;
+}
+
+/* TEXTO DO TELEFONE E EMAIL */
+.contato h5 {
+  margin: 0;
+  align-items: center;
+  display: flex;
+}
+
+/* LOGOS DA BOX DE CONTATO */
+.contato img {
+  height: 16px;
+  margin-right: 1px;
+}
+
+/* LOGO DA BOX DA OMNI */
+.footer .box h2 img {
+  height: 2%;
+  width: 26%;
+}
+
+/* TEXTO DA BOX OMNI */
+.box h2 {
+  margin: 0;
+  align-items: center;
+  display: flex;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* HOME */
+.banner-home {
+  /* border: 3px solid red; */
+  height: 1000vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Quicksand_Book;
+}
+
+/* CONFIGURAÇÕES DO CONTAINER DO BANNER-HOME */
+.banner-home .container {
+  /* border: 3px solid red; */
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+/* SEÇÕES DA PÁGINA */
+.section {
+  /* border: 3px solid red; */
+  width: 100%;
+  height: 840px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+.section .container {
+  display: flex;
+  flex-flow: row wrap;
+}
+.section img {  
+  height: 45%;
+  border-radius: 50px;
+}
+/* TEXTO PRINCIPAL DA SECTION 1/2 */
+.section p {
+  width: 900px;
+  padding: 0% 2% 0% 2%;
+  font-size: 45px;
+  text-align: justify;
+}
+
+/* SECTION 1 */
+.sec1 {
+  background-image: url(../assets/imgs/home/background1.jpg);
+  background-size: cover;
+}
+.sec1 p {
+  color: #ecdaff;
+  border-radius: 10px;
+  border-right: 10px solid rgba(67, 27, 109, 0.6);
+  border-bottom: 10px solid rgba(67, 27, 109, 0.6);
+}
+
+/* SECTION 2 */
+.sec2 p {
+  padding: 1%;
+  border-radius: 10px;
+  border-left: 10px solid #431b6d;
+  border-bottom: 10px solid #431b6d;
+}
+
+/* SECTION 3: VISÃO DE NEGÓCIO */
+.sec3 {
+  /* border: 3px solid red; */
+  display: flex;
+}
+.sec3 .container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* CARD IMAGEM-DESC */
+.card-info {
+  /* border: 3px solid green; */
+  width: 300px;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* LOGOS */
+.sec3 img {
+  border-radius: 0px;
+  width: 170px;
+}
+/* DESCRIÇÃO */
+.sec3 p{
+  width: 80%;
+  color: black;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin: 10px;
+}
+/* DIVISÓRIA DA SECTION 3 */
+.sec3 hr {
+  width: 94%;
+  margin: 0px;
+  border: 3px solid;
+  border-radius: 50px;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* FORMULÁRIO */
+.banner {
+  /* border: 3px solid red; */
+  width: 100%;
+  /* height: 731px; */
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Quicksand_Book;
+}
+
+.banner .container {
+  justify-content: center;
+  align-items: center;
+}
+
+/* CARD COM INPUTS */
+.card-input {
+  /* border: 3px solid red; */
+  width: 560px;
+  height: 560px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 15px;
+}
+/* TITLE DO CARD-INPUT */
+.card-input h1 {
+  font-size: 35px;
+  margin: 0px;
+}
+
+/* FORM_BOX */
+.form-box {
+  /* border: 3px solid red; */
+  width: 70%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+/* INPUT PADRÃO DE FORM-BOX */
+.form-box input {
+  width: 100%;
+  padding: 0;
+  height: 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: #F5E9FF;
+  color: #1e0935;
+  font-family: Quicksand_Book;
+  font-size: 25px;
+  text-align: center;
+}
+
+/* DIV DE INPUT NO FORM */
+.form-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* TÍTULO DAS INPUTS */
+.form-input p {
+  margin: 15px 0px 5px 10px;
+  font-size: 25px;
+  font-weight: 1000;
+  align-self: flex-start;
+}
+
+/* BOTÃO DE FORM */
+.form-button {
+  width: 115px;
+  height: 45px;
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  border: 5px solid #9000ff;
+  border-radius: 5px;
+  font-family: Quicksand_Book;
+  font-size: 25px;
+  cursor: pointer;
+}
+.form-button a {
+  padding: 5% 16% 5% 16%;
+  text-decoration: none;
+  color: white;
+}
+
+.form-select-p {
+  align-self: center;
+  width: 60%;
+}
+.form-select {
+  width: 100%;
+  height: 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: #F5E9FF;
+  color: #1e0935;
+  font-family: Quicksand_Book;
+  font-size: 25px;
+  text-align: center;
+  cursor: cell  ;
+}
+.form-select option {
+  color: #FFFFFF;
+  font-weight: 1000;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* LOGIN */
+.card-login {
+  height: 70vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border-right: 15px solid #9000ff;
+  border-bottom: 15px solid #9000ff;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* SIMULADOR */
+
+.card-simulador {
+  height: 70vh;
+  border-left: 10px solid #5E2D92;
+  border-top: 10px solid #5E2D92;
+}
+
+.simulador-result {
+  display: none;
+  flex-direction: column;
+  border-right: 10px solid #5E2D92;
+  border-bottom: 10px solid #5E2D92;
+  border-left: 5px dashed #5E2D92;
+}
+.div-resultado {
+  width: 60%;
+  height: 60%;
+  padding: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-family: Quicksand_Light;
+  border-radius: 15px;
+
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* UNIDADES */
+.card-unidades {
+  height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-right: 15px solid #5E2D92;
+  border-left: 15px solid #5E2D92;
+}
+
+.form-btn-dashboard {
+  width: 190px;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* CADASTRO */
+.banner-cadastro .container {
+  justify-content: center;
+}
+
+.card-cadastro {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  height: 80vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border-right: 10px solid #5E2D92;
+}
+
+.form-cadastro {
+  height: 70%;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* MEMBROS */
+.card-membros {
+  width: 50%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  height: 80vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  border-left: 10px solid #5E2D92;
+}
+.card-membros h1 {
+  margin: 30px 0px 30px 0px;
+}
+
+/* DIV QUE COMPORTARÁ TABLE */
+.div-membros {
+  width: 95%;
+  height: 500px;
+  overflow: auto;
+  background-color: #5E2D92;
+  border-radius: 15px;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+
+/* DASHBOARDS */
+.dash-header {
+  background-color: rgba(91, 18, 100, 0.8);
+}
+
+.banner-dash {
+  /* border: 3px solid red; */
+  height: fit-content;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Quicksand_Book;
+}
+
+/* CONFIGURAÇÕES DO CONTAINER DO BANNER-DASH */
+.banner-dash .container {
+  /* border: 3px solid red; */
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* HEADER PRÉ-GRÁFICOS */
+.dash-label {
+  width: 100%;
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+/* LINHA SEPARADORA DO HEADER */
+.dash-label hr {
+  width: 40%;
+  height: 3px;
+  margin: 0;
+  border: 0px;
+  background-color: #8F00FF;
+}
+/* TITLE DO HEADER */
+.dash-label h1 {
+  height: 15%;
+  margin: 0;
+  padding: 15px 20px 10px 20px;
+  /* display: flex; */
+  font-size: 40px;
+  border: 3px solid #9d24fa;
+  border-bottom: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+/* COR PARA GRÁFICOS DE UMIDADE */
+.dash-umi h1 {
+  color: #ecdaff;
+}
+/* COR PARA GRÁFICOS DE TEMPERATURA */
+.dash-temp h1 {
+  color: #ecdaff;
+}
+
+/* ONDE ESTARÃO OS GRÁFICOS */
+.div-graphs {
+  /* border: 3px solid red; */
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: space-center;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.graph-temp {
+  flex-direction: row-reverse;
+}
+
+/* GRÁFICOS LATERAIS */
+.div-side-graphs {
+  /* border: 3px solid blue; */
+  width: 40%;
+  height: 78%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CHARTS */
+/* GRÁFICO LINHA */
+.div-linechart {
+  /* border-right: 5px solid red; */
+  width: 55%;
+  height: 70%;
+  padding: 2%;
+  border-radius: 15px;
+  border-left: 10px solid;
+  border-bottom: 10px solid;
+}
+
+/* GRÁFICO PIZZA */
+.div-dougchart {
+  /* border: 3px solid red; */
+  width: fit-content; 
+  height: 38%;
+  padding-top: 20px;
+  border-right: 10px solid;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  /* border-bottom: 10px solid #8008ff; */
+}
+/* GRÁFICO BARRA */
+.div-barchart {
+  /* border: 3px solid red; */
+  width: 90%;
+  height: 55%;
+  border-radius: 15px;
+  border-top: 5px solid;
+  border-right: 10px solid;
+  border-bottom: 10px solid;
+}
+
+/* CORES PARA GRÁFICO DE UMIDADE */
+.chart-umidade {
+  background-color: #e2c6ff;
+  border-color: #8008ff;
+}
+/* CORES PARA GRÁFICO DE TEMPERATURA */
+.chart-temperatura {
+  background-color: #230F38;
+  border-color: #8F00FF;
+}

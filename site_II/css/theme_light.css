@@ -1,0 +1,82 @@
+/* BODY */
+body {
+    background-image: url(../assets/imgs/light-background-image.jpg);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* HEADER */
+/* NAVBAR DE OPÇÕES DO HEADER */
+.dash-header {
+    background-color: #C697F7;
+}
+.navbar-header hr {
+    background-color: white;
+}
+.navbar-header a {
+    color: white;
+}
+
+.footer {
+    background-color: #a451fd;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/* HOME */
+/* HEADER FIXO - HOME */
+.navmask {
+    background-color: rgba(178, 109, 252, 0.4);
+}
+.sec2 {
+    background-image: linear-gradient(to bottom, #c79af7, #b26dfc);
+}
+.sec2 p {
+    color: #ecdaff;
+}
+
+.sec3 {
+    background-image: linear-gradient(to bottom, #b26dfc 90%, #a451fd);
+
+}
+.sec3 p {
+    color: #ecdaff;
+}
+.sec3 hr {
+    border-color: #ecdaff;
+}
+
+.font-stylish {
+    color: #ecdaff;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* SIMULADOR/LOGIN/CADASTRO */
+.card-input {
+    background-color: rgba(143, 0, 255, 0.4);
+}
+
+.form-button {
+    background-color: rgba(174, 67, 255, 0.8);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* SIMULADOR */
+.div-resultado {
+    background-color: #ae43ff;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* UNIDADES */
+.form-select option {
+    background-color: #ad60ff;
+    filter: drop-shadow(0);
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* DASHBOARD */
+.dash-sec1 {
+    background-image: linear-gradient(to bottom, #C697F7, #bd80ff);
+}
+.dash-sec2 {
+    background-image: linear-gradient(to bottom, #bd80ff, #A451FD);
+}

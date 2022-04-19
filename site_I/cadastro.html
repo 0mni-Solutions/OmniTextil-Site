@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link id="link_theme" rel="stylesheet" href="" />
+    <title>Cadastro | OMNI Têxtil</title>
+    <link rel="icon" href="assets/imgs/header-footer/logo_imgWHITE.png" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="container">
+        <a href="index.html" class="href-title">
+          <img
+            src="assets/imgs/header-footer/logo-OMNI_Textil.png"
+            alt="OMNI TÊXTIL"
+          />
+        </a>
+        <!-- ALTERAR A CLASSE EM DETERMINADAS PÁGINAS -->
+        <ul class="navbar-header">
+          <li class=""><a href="unidades.html">Unidades</a></li>
+          <hr />
+          <li class="page-selected"><a href="cadastro.html">Cadastro</a></li>
+          <hr />
+          <li class=""><a href="login.html">Sair</a></li>
+          <img
+            id="img_theme"
+            onclick="theme_change()"
+            src="assets/imgs/header-footer/sun_off.png"
+            title="Mudar tema"
+            alt="Sol do Tema"
+          />
+        </ul>
+      </div>
+    </div>
+
+    <!-- BANNER -->
+    <div class="banner banner-cadastro">
+      <div class="container">
+        <!-- CARD CADASTRO -->
+        <div class="card-input card-cadastro">
+          <h1>CADASTRO</h1>
+          <div class="form-box form-cadastro">
+            <div class="form-input">
+              <p>Nome:</p>
+              <input type="text" id="input_nome" spellcheck="false" />
+            </div>
+            <div class="form-input">
+              <p>E-mail:</p>
+              <input type="email" id="input_email" spellcheck="false" />
+            </div>
+            <div class="form-input">
+              <p>Senha:</p>
+              <input type="password" id="input_senha" />
+            </div>
+            <div class="form-input">
+              <p>Confirmar Senha:</p>
+              <input type="password" id="input_confirmar_senha" />
+            </div>
+            <div class="form-input form-select-p">
+              <p>Permissão:</p>
+              <select id="select_cargo" class="form-select">
+                <option value="VAZIO">-</option>
+                <option value="COMUM">Comum</option>
+                <option value="ADMIN">Administrador</option>
+              </select>
+            </div>
+          </div>
+          <button
+            onclick="cadastrar()"
+            class="form-button"
+            title="Cadastrar usuário"
+          >
+            entrar
+          </button>
+        </div>
+        <!-- CARD MEMBROS -->
+        <div class="card-input card-membros" id="card_membros">
+          <h1>MEMBROS</h1>
+          <div class="div-membros">
+            <!-- TABELA -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <!-- BOX DE REPORT -->
+        <div class="box reports">
+          <img src="assets/imgs/header-footer/logo_lupa.png" alt="lupa" />
+          <p>
+            Feedbacks<br />
+            Reports
+          </p>
+        </div>
+        <!-- BOX DE CONTATO -->
+        <div class="box contato">
+          <h4>Contato</h4>
+          <hr />
+          <h5>
+            <img
+              src="assets/imgs/header-footer/logo_whats.png"
+              alt="whats"
+            />(011)2534-1484
+          </h5>
+          <h5>
+            <img
+              src="assets/imgs/header-footer/logo_email.png"
+              alt="email"
+            />omnisuport@solution.com
+          </h5>
+        </div>
+        <!-- BOX DA OMNI SOLUTIONS -->
+        <div class="box">
+          <h2>OMNI Solution</h2>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<script src="js/script.js"></script>
