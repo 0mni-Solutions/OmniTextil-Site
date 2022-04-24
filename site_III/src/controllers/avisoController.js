@@ -130,9 +130,9 @@ function editar(req, res) {
 }
 
 function deletar(req, res) {
-    var idAviso = req.params.idAviso;
+    var idUsuario = req.params.idUsuario;
 
-    avisoModel.deletar(idAviso)
+    avisoModel.deletar(idUsuario)
         .then(
             function (resultado) {
                 res.json(resultado);

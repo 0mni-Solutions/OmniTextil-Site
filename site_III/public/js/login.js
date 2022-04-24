@@ -50,10 +50,11 @@ function entrar() {
           console.log(JSON.stringify(json));
 
           sessionStorage.ID_USUARIO = json.idUsuario;
+          sessionStorage.setItem(`idUsuario`, `${json.idUsuario}`);
           sessionStorage.NOME_USUARIO = json.nome;
           sessionStorage.EMAIL_USUARIO = json.email;
           sessionStorage.CARGO_USUARIO = json.cargo;
-          // sessionStorage.EMPRESA_USUARIO = json.fkEmpresa;
+          sessionStorage.EMPRESA_USUARIO = json.fkEmpresa;
           sessionStorage.setItem(`fkEmpresa`, `${json.fkEmpresa}`);
 
           setTimeout(function () {

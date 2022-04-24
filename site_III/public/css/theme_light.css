@@ -17,7 +17,7 @@ body {
 }
 
 .footer {
-    background-color: #a451fd;
+    background-color: rgb(164, 81, 252);;
 }
 
 
@@ -84,7 +84,7 @@ body {
 /*-----------------------------------------------------------------------------------*/
 /* ERROS & LOADING */
 .loading-div img {
-    filter: hue-rotate(325deg);
+    filter: hue-rotate(300deg);
 }
 
 #div_erros_login {

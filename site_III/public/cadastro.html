@@ -14,7 +14,7 @@
     <!-- HEADER -->
     <div class="header">
       <div class="container">
-        <a href="index.html" class="href-title">
+        <a onclick="limparSessao()" href="index.html" class="href-title">
           <img
             src="assets/imgs/header-footer/logo-OMNI_Textil.png"
             alt="OMNI TÊXTIL"
@@ -71,14 +71,14 @@
                 <option value="ADMIN">Administrador</option>
               </select>
             </div>
+            <button
+              onclick="cadastrar()"
+              class="form-button"
+              title="Cadastrar usuário"
+            >
+              entrar
+            </button>
           </div>
-          <button
-            onclick="cadastrar()"
-            class="form-button"
-            title="Cadastrar usuário"
-          >
-            entrar
-          </button>
           <!-- ALERTA DE ERRO -->
           <div class="alerta_erro">
             <div class="card_erro" id="cardErro">
@@ -155,7 +155,6 @@
   </body>
 </html>
 
-<script src="js/script.js"></script>
-<script src="js/funcoes.js"></script>
 <script src="js/cadastro.js"></script>
-<script src="js/membros.js"></script>
+<script src="js/funcoes.js"></script>
+<script src="js/script.js"></script>

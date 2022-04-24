@@ -20,7 +20,7 @@ body {
   flex-direction: column;
   color: white;
   font-family: Quicksand_Book;
-  background-size: cover;
+  background-size: auto;
   background-color: #f0e1ff;
 }
 
@@ -106,11 +106,10 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* FOOTER */
 .footer {
   width: 100%;
-  height: 100px;
+  height: 120px;
   padding: 0.8%;
   display: flex;
   align-self: end;
@@ -192,7 +191,6 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* HOME */
 .banner-home {
   /* border: 3px solid red; */
@@ -283,7 +281,7 @@ body {
 /* LOGOS */
 .sec3 img {
   border-radius: 0px;
-  width: 170px;
+  width: 180px;
 }
 /* DESCRIÇÃO */
 .sec3 p {
@@ -303,7 +301,62 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
+/* EQUIPE */
+/* section inteira personalizada */
+.sec2-equipe {
+  height: fit-content;
+}
 
+/* container dos cards de integrante */
+.equipe-imgs {
+  width: 100%;
+  height: fit-content;
+  margin-top: 90px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+/* card de cada integrante */
+.card-equipe {
+  width: 384px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+/* imagem de cada um */
+.card-equipe img {
+  width: 308px;
+  height: 411px;
+  margin: 80px;
+  margin-bottom: 20px;
+  border-radius: 40px;
+  border-right: 10px solid #8008FF;
+  border-bottom: 10px solid #8008FF;
+}
+
+/* descrição */
+.card-equipe p {
+  border: 0;
+  width: 100%;
+  text-align: center;
+  margin-top: 0;
+}
+/* nome */
+.card-equipe .equipe-p-nome {
+  margin-bottom: 0;
+  font-size: 60px;
+  font-family: Quicksand_Bold;
+}
+/* função */
+.card-equipe .equipe-p-desc{
+  margin-bottom: 80px;
+  font-size: 25px;
+  font-family: Quicksand_Bold;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
 /* FORMULÁRIO */
 .banner {
   /* border: 3px solid red; */
@@ -342,11 +395,10 @@ body {
 /* FORM_BOX */
 .form-box {
   /* border: 3px solid red; */
-  width: 70%;
-  height: 40%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  align-items: center;
 }
 /* INPUT PADRÃO DE FORM-BOX */
 .form-box input {
@@ -364,6 +416,7 @@ body {
 
 /* DIV DE INPUT NO FORM */
 .form-input {
+  width: 392px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -380,7 +433,7 @@ body {
 .form-button {
   width: 115px;
   height: 45px;
-  margin-top: 10%;
+  margin-top: 5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -399,10 +452,10 @@ body {
 
 .form-select-p {
   align-self: center;
-  width: 60%;
+  width: 30%;
 }
 .form-select {
-  width: 100%;
+  width: 200px;
   height: 30px;
   border-radius: 10px;
   border: 0;
@@ -419,10 +472,9 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* LOGIN */
 .card-login {
-  height: 70vh;
+  height: 65vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -431,7 +483,6 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* SIMULADOR */
 
 .card-simulador {
@@ -460,7 +511,6 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* UNIDADES */
 .card-unidades {
   height: 50vh;
@@ -476,7 +526,6 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* CADASTRO */
 /* DESABILITAR OPÇÃO DE CADASTRAR */
 #li_cadastro {
@@ -486,14 +535,20 @@ body {
   display: none;
 }
 
+.banner-cadastro {
+  height: 200vh;
+  /* background-image: url(../assets/imgs/dark-background-image.jpg); */
+}
+
 .banner-cadastro .container {
   justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  /* height: 2000px; */
 }
 
 .card-cadastro {
-  /* margin-top: 1%;
-  margin-bottom: 1%; */
-  height: 80vh;
+  height: 86vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -501,13 +556,12 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* MEMBROS */
 .card-membros {
-  width: 50%;
+  width: 50vw;
+  height: 86vh;
   margin-top: 1%;
   margin-bottom: 1%;
-  height: 80vh;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-evenly;
@@ -520,7 +574,7 @@ body {
 /* DIV QUE COMPORTARÁ TABLE */
 .div-membros {
   width: 95%;
-  height: 60%;
+  height: 75%;
   overflow: auto;
   background-color: #5e2d92;
   border-radius: 15px;
@@ -563,8 +617,26 @@ body {
   text-align: left;
 }
 
-/*------------------------------------------------------------------------------------------------------*/
+/* COLUNA DE ÍCONES */
+.td-icon {
+  width: 10%;
+  text-align: center;
+  cursor: pointer;
+  background-image: url(../assets/imgs/editar.png);
+  border: 1px solid;
+  border-top-color: rgba(169, 61, 252, 0.8);
+  border-right-color: rgba(154, 58, 231, 0.1);
+  border-bottom-color: rgba(169, 61, 252, 0.8);
+  border-left-color: rgba(154, 58, 231, 0.1);
+}
 
+/* IMAGEM DAS OPÇÕES */
+#edit_logo {
+  width: 15px;
+  height: 15px;
+}
+
+/*------------------------------------------------------------------------------------------------------*/
 /* DASHBOARDS */
 .dash-header {
   background-color: rgba(91, 18, 100, 0.8);
@@ -653,6 +725,16 @@ body {
   align-items: center;
 }
 
+/* DIV QUE RECEBE A KPI E O GRÁFICO DE DONUT */
+.div-kpi {
+  /* border: 5px solid red; */
+  width: 90%;
+  height: 38%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 /* CHARTS */
 /* GRÁFICO LINHA */
 .div-linechart {
@@ -668,8 +750,7 @@ body {
 /* GRÁFICO PIZZA */
 .div-dougchart {
   /* border: 3px solid red; */
-  width: fit-content;
-  height: 38%;
+  width: 44%;
   padding-top: 20px;
   border-right: 10px solid;
   border-top-left-radius: 15px;
@@ -687,6 +768,41 @@ body {
   border-bottom: 10px solid;
 }
 
+/* KPI DIV */
+.kpi-now {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.kpi-title {
+  height: 20%;
+  font-size: 25px;
+  font-family: Quicksand_Bold;
+}
+.kpi-data {
+  width: 90%;
+  height: fit-content;
+  text-align: center;
+  font-size: 50px;
+  font-weight: 1000;
+}
+
+/* KPI EM UMIDADE */
+.chart-umidade .kpi-data {
+  color: #8008ff;
+}
+.chart-umidade .kpi-title {
+  color: #5e2d92;
+}
+/* KPI EM TEMPERATURA */
+.chart-temperatura .kpi-data {
+  color: #d7b1ff;
+}
+.chart-temperatura .kpi-title {
+  color: #BF6BFF;
+}
 /* CORES PARA GRÁFICO DE UMIDADE */
 .chart-umidade {
   background-color: #e2c6ff;
@@ -699,7 +815,6 @@ body {
 }
 
 /*------------------------------------------------------------------------------------------------------*/
-
 /* ERRO */
 /* div dos dois próximos itens */
 .alerta_erro {

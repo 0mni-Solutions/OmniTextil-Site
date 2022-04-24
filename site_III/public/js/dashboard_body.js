@@ -3,6 +3,8 @@
 // GRÁFICO DE LINHA
 UMI_line_graph()
 function UMI_line_graph() {
+    var ctx = document.getElementById('UMI_ChartLINE').getContext("2d");
+
     const horario = [
         '00h',
         '01h',
@@ -31,6 +33,10 @@ function UMI_line_graph() {
     ];
 
     var dataPoints = [40, 46, 35, 48, 54, 62, 49, 38, 43, 39, 34, 29, 35, 31, 24, 15, 17, 20, 24, 33, 33, 39, 45, 50];
+    
+    gradient = ctx.createLinearGradient(0, 0, 0, 450);
+    gradient.addColorStop(0, 'rgba(157, 66, 255, 1)');
+    gradient.addColorStop(1, 'rgba(157, 66, 255, 0.0)');
 
     const dataLINE = {
         labels: horario,
@@ -48,10 +54,12 @@ function UMI_line_graph() {
                 // MEDIDAS DO SENSOR
                 data: dataPoints,
                 label: 'DHT11',
-                backgroundColor: '#8008FF',
-                borderColor: '#8008FF',
+                fill: true,
+                backgroundColor: gradient,
                 tension: 0.5,
                 pointRadius: 5,
+                borderColor: '#8008FF',
+                pointBackgroundColor: '#8008FF',
             }]
     };
 
@@ -60,36 +68,25 @@ function UMI_line_graph() {
         maintainAspectRatio: false,
         responsive: true,
 
-        // ANIMAÇÃO (RETIRAR)
-        animation: {
-            onComplete: () => {
-                delayed = true;
-            },
-            delay: (context) => {
-                let delay = 0;
-                if (context.type === "data" && context.mode === "default" && !delayed) {
-                    delay = context.dataIndex * 20 + context.datasetIndex * 100;
-                }
-                return delay;
-            },
-        },
+        // // ANIMAÇÃO (RETIRAR)
+        // animation: {
+        //     onComplete: () => {
+        //         delayed = true;
+        //     },
+        //     delay: (context) => {
+        //         let delay = 0;
+        //         if (context.type === "data" && context.mode === "default" && !delayed) {
+        //             delay = context.dataIndex * 20 + context.datasetIndex * 100;
+        //         }
+        //         return delay;
+        //     },
+        // },
         // PARTE SUPERIOR
         plugins: {
-            // TÍTULO NO GRÁFICO
-            title: {
-                display: true,
-                padding: 0,
-                text: "TEMPO REAL",
-                color: '#5E2D92',
-                font: {
-                    size: 30,
-                    family: 'Quicksand_Bold',
-                },
-            },
             // SUBTÍTULO NO GRÁFICO
             subtitle: {
                 display: true,
-                padding: 20,
+                padding: 10,
                 text: '| HOJE |',
                 color: '#5E2D92',
                 font: {
@@ -139,6 +136,10 @@ function UMI_line_graph() {
         scales: {
             // DIMENSÕES (X-AXIS)
             x: {
+                // LINHAS VERTICAIS
+                grid: {
+                    color: '#CEA0FF',
+                },                
                 // TITLE DO EIXO X
                 title: {
                     display: true,
@@ -163,6 +164,10 @@ function UMI_line_graph() {
             },
             // MÉTRICAS (Y-AXIS)
             y: {
+                // LINHAS HORIZONTAIS
+                grid: {
+                    color: '#CEA0FF',
+                },                           
                 // TITLE DO EIXO Y
                 title: {
                     display: true,
@@ -305,6 +310,10 @@ function UMI_bar_graph() {
         scales: {
             // DIMENSÕES (X-AXIS)
             x: {
+                // LINHAS VERTICAIS
+                grid: {
+                    color: '#CEA0FF',
+                },                  
                 // ESTILO DAS DIMENSÕES
                 ticks: {
                     color: '#1e0935',
@@ -316,6 +325,10 @@ function UMI_bar_graph() {
             },
             // MÉTRICAS (Y-AXIS)
             y: {
+                // LINHAS HORIZONTAIS
+                grid: {
+                    color: '#CEA0FF',
+                },                  
                 // TITLE DO EIXO Y
                 title: {
                     display: true,
@@ -411,19 +424,8 @@ function UMI_doughnut_graph() {
             title: {
                 display: true,
                 padding: 10,
-                text: "SENSOR DHT11",
+                text: "| CAPACIDADE |",
                 color: '#5E2D92',
-                font: {
-                    size: 25,
-                    family: 'Quicksand_Bold',
-                },
-            },
-            // SUBTÍTULO NO GRÁFICO
-            subtitle: {
-                display: true,
-                padding: 0,
-                text: '| UMIDADE |',
-                color: '#bf6bff',
                 font: {
                     size: 15,
                     family: 'Quicksand_Bold',
@@ -464,6 +466,8 @@ function UMI_doughnut_graph() {
 // GRÁFICO DE LINHA
 TEMP_line_graph()
 function TEMP_line_graph() {
+    var ctx = document.getElementById('TEMP_ChartLINE').getContext("2d");
+    
     const horario = [
         '00h',
         '01h',
@@ -493,6 +497,10 @@ function TEMP_line_graph() {
 
     var dataPoints = [15, 10, 6, 8, 4, 11, 19, 30, 31, 27, 24, 25, 20, 19, 22, 17, 17, 23, 28, 29, 16, 20, 22, 15];
 
+    gradient = ctx.createLinearGradient(0, 0, 0, 450);
+    gradient.addColorStop(0, 'rgba(215, 177, 255, 1)');
+    gradient.addColorStop(1, 'rgba(215, 177, 255, 0.0)');
+
     const dataLINE = {
         labels: horario,
         datasets: [
@@ -509,10 +517,12 @@ function TEMP_line_graph() {
                 // MEDIDAS DO SENSOR
                 data: dataPoints,
                 label: 'DHT11',
-                backgroundColor: '#D7B1FF',
-                borderColor: '#D7B1FF',
+                fill: true,
                 tension: 0.5,
-                pointRadius: 5,
+                pointRadius: 5,                
+                backgroundColor: gradient,
+                borderColor: '#D7B1FF',
+                pointBackgroundColor: '#D7B1FF',
             }]
     };
 
@@ -536,21 +546,10 @@ function TEMP_line_graph() {
         },
         // PARTE SUPERIOR
         plugins: {
-            // TÍTULO NO GRÁFICO
-            title: {
-                display: true,
-                padding: 0,
-                text: "TEMPO REAL",
-                color: '#bf6bff',
-                font: {
-                    size: 30,
-                    family: 'Quicksand_Bold',
-                },
-            },
             // SUBTÍTULO NO GRÁFICO
             subtitle: {
                 display: true,
-                padding: 20,
+                padding: 10,
                 text: '| HOJE |',
                 color: '#bf6bff',
                 font: {
@@ -600,6 +599,10 @@ function TEMP_line_graph() {
         scales: {
             // DIMENSÕES (X-AXIS)
             x: {
+                // LINHAS VERTICAIS
+                grid: {
+                    color: '#3b2553',
+                },
                 // TITLE DO EIXO X
                 title: {
                     display: true,
@@ -624,6 +627,10 @@ function TEMP_line_graph() {
             },
             // MÉTRICAS (Y-AXIS)
             y: {
+                // LINHAS HORIZONTAIS
+                grid: {
+                    color: '#3b2553',
+                },
                 // TITLE DO EIXO Y
                 title: {
                     display: true,
@@ -765,6 +772,10 @@ function TEMP_bar_graph() {
         scales: {
             // DIMENSÕES (X-AXIS)
             x: {
+                // LINHAS VERTICAIS
+                grid: {
+                    color: '#3b2553',
+                },
                 // ESTILO DAS DIMENSÕES
                 ticks: {
                     color: '#D7B1FF',
@@ -776,6 +787,10 @@ function TEMP_bar_graph() {
             },
             // MÉTRICAS (Y-AXIS)
             y: {
+                // LINHAS HORIZONTAIS
+                grid: {
+                    color: '#3b2553',
+                },                
                 // TITLE DO EIXO Y
                 title: {
                     display: true,
@@ -870,18 +885,7 @@ function TEMP_doughnut_graph() {
             title: {
                 display: true,
                 padding: 10,
-                text: "SENSOR DHT11",
-                color: '#bf6bff',
-                font: {
-                    size: 25,
-                    family: 'Quicksand_Bold',
-                },
-            },
-            // SUBTÍTULO NO GRÁFICO
-            subtitle: {
-                display: true,
-                padding: 0,
-                text: '| TEMPERATURA |',
+                text: "| CAPACIDADE |",
                 color: '#bf6bff',
                 font: {
                     size: 15,

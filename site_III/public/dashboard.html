@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <header class="header dash-header">
       <div class="container">
-        <a href="index.html" class="href-title">
+        <a onclick="limparSessao()" href="index.html" class="href-title">
           <img
             src="assets/imgs/header-footer/logo-OMNI_Textil.png"
             alt="OMNI TÊXTIL"
@@ -54,8 +54,14 @@
               <canvas id="UMI_ChartLINE"></canvas>
             </div>
             <div class="div-side-graphs">
-              <div class="div-dougchart chart-umidade">
-                <canvas id="UMI_ChartDOUG"></canvas>
+              <div class="div-kpi">
+                <div class="div-dougchart chart-umidade kpi-now">
+                  <div class="kpi-title">TEMPO REAL</div>
+                  <div class="kpi-data">51,5%</div>
+                </div>
+                <div class="div-dougchart chart-umidade">
+                  <canvas id="UMI_ChartDOUG"></canvas>
+                </div>
               </div>
               <div class="div-barchart chart-umidade">
                 <canvas id="UMI_ChartBAR"></canvas>
@@ -76,8 +82,14 @@
               <canvas id="TEMP_ChartLINE"></canvas>
             </div>
             <div class="div-side-graphs">
-              <div class="div-dougchart chart-temperatura">
-                <canvas id="TEMP_ChartDOUG"></canvas>
+              <div class="div-kpi">
+                <div class="div-dougchart chart-temperatura kpi-now">
+                  <div class="kpi-title">TEMPO REAL</div>
+                  <div class="kpi-data">17,0ºC</div>
+                </div>
+                <div class="div-dougchart chart-temperatura">
+                  <canvas id="TEMP_ChartDOUG"></canvas>
+                </div>
               </div>
               <div class="div-barchart chart-temperatura">
                 <canvas id="TEMP_ChartBAR"></canvas>
@@ -125,6 +137,6 @@
   </body>
 </html>
 
-<script src="js/script_dashboards.js"></script>
+<script src="js/dashboard_body.js"></script>
 <script src="js/script.js"></script>
 <script src="js/funcoes.js"></script>

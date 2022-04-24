@@ -14,7 +14,7 @@
     <!-- HEADER -->
     <div class="header">
       <div class="container">
-        <a href="index.html" class="href-title">
+        <a onclick="limparSessao()" href="index.html" class="href-title">
           <img
             src="assets/imgs/header-footer/logo-OMNI_Textil.png"
             alt="OMNI TÊXTIL"
@@ -52,12 +52,15 @@
             </div>
           </div>
           <button
-            onclick="carregar_dashboard()"
+            onclick=""
             class="form-button form-btn-dashboard"
             title="Ir para a dashboard"
           >
             <a href="dashboard.html"> DASHBOARD </a>
           </button>
+          <div id="div_aguardar" class="loading-div">
+            <img src="assets/circle-loading.gif" id="loading-gif" />
+          </div>
         </div>
       </div>
     </div>

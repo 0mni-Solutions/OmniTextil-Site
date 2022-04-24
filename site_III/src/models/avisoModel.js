@@ -3,7 +3,8 @@ var database = require("../database/config");
 function listar(fkEmpresa) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
-            SELECT 
+            SELECT
+            Comum.idUsuario,
             Admin.nome as nomeAdmin,
             Comum.nome,
             Comum.email,
@@ -91,15 +92,16 @@ function editar(novaDescricao, idAviso) {
     return database.executar(instrucao);
 }
 
-function deletar(idAviso) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idAviso);
+function deletar(idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idUsuario);
     var instrucao = `
-        DELETE FROM aviso WHERE id = ${idAviso};
+        
+        DELETE FROM Usuario WHERE idUsuario = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
-
+// UPDATE Usuario SET fkAdmin = null WHERE idUsuario = ${idUsuario};
 module.exports = {
     listar,
     listarUnidades,

@@ -16,16 +16,16 @@ if (typeof li_cadastro != "undefined") { // verifica se o elemento existe (OBRIG
 // lembrar de assegurar em 'funcoes.js' para realocar o tema para o sessionStorage;
 // definir tema padrão às páginas
 link_theme.href = "css/theme_dark.css";
-img_theme.src = "assets/imgs/header-footer/sun_on.png";
+img_theme.src = "assets/imgs/header-footer/sun.png";
 
 // definir tema ao carregar a página
 if (sessionStorage.theme == "light") {
   link_theme.href = "css/theme_light.css";
-  img_theme.src = "assets/imgs/header-footer/sun_off.png";
+  img_theme.src = "assets/imgs/header-footer/moon.png";
   sessionStorage.theme == "light";
 } else if (sessionStorage.theme == "dark") {
   link_theme.href = "css/theme_dark.css";
-  img_theme.src = "assets/imgs/header-footer/sun_on.png";
+  img_theme.src = "assets/imgs/header-footer/sun.png";
   sessionStorage.theme == "dark";
 } else {
   sessionStorage.theme = "dark";
@@ -34,11 +34,11 @@ if (sessionStorage.theme == "light") {
 function theme_change() {
   if (sessionStorage.theme == "dark") {
     link_theme.href = "css/theme_light.css";
-    img_theme.src = "assets/imgs/header-footer/sun_off.png";
+    img_theme.src = "assets/imgs/header-footer/moon.png";
     sessionStorage.theme = "light";
   } else {
     link_theme.href = "css/theme_dark.css";
-    img_theme.src = "assets/imgs/header-footer/sun_on.png";
+    img_theme.src = "assets/imgs/header-footer/sun.png";
 
     sessionStorage.theme = "dark";
   }
