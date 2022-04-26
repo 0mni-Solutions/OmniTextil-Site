@@ -57,6 +57,11 @@ body {
 .card-input {
     background-color: rgba(82, 0, 145, 0.6);
 }
+/* cor do cursor das inputs */
+input{
+caret-color: #8F00FF;
+color: #1e0935;
+}
 
 .form-button {
     background-color: rgba(80, 0, 141, 0.8);

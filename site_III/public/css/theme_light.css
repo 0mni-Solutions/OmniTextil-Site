@@ -54,7 +54,10 @@ body {
 .card-input {
     background-color: rgba(143, 0, 255, 0.4);
 }
-
+input{
+    caret-color: #1e0935;
+    color: #ae43ff;
+}
 .form-button {
     background-color: rgba(174, 67, 255, 0.8);
 }
