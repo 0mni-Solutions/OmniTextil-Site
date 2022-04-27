@@ -448,7 +448,14 @@ body {
   text-decoration: none;
   color: white;
 }
-
+/* button animado */
+.form-button:hover{
+  width: 118px;
+}
+.form-button:active {
+  border: 5px solid #9d24fa;
+  background-color: #9d24fa;
+} 
 .form-select-p {
   align-self: center;
   width: 30%;
