@@ -15,7 +15,9 @@ body {
 .navbar-header a {
     color: white;
 }
-
+.navbar-header a:hover{
+    color: #ae43ff;
+  }
 .footer {
     background-color: rgb(164, 81, 252);;
 }
