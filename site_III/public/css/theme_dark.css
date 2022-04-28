@@ -19,7 +19,7 @@ body {
     color: #9d24fa;
 }
 .navbar-header img:hover{
-    filter: grayscale(1)
+    filter: grayscale(1);
 }
 
 .footer {
