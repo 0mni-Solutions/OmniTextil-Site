@@ -17,7 +17,10 @@ body {
 }
 .navbar-header a:hover{
     color: #ae43ff;
-  }
+}
+.navbar-header img:hover{
+    filter: invert();
+}
 .footer {
     background-color: rgb(164, 81, 252);;
 }
