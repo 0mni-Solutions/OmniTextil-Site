@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
     <link id="link_theme" rel="stylesheet" href="" />
-    <title>Unidades | OMNI Têxtil</title>
+    <title>Login | OMNI Têxtil</title>
     <link rel="icon" href="assets/imgs/header-footer/logo_imgWHITE.png" />
   </head>
 
   <body>
     <!-- HEADER -->
-    <div class="header">
+    <header class="header">
       <div class="container">
         <a href="index.html" class="href-title">
           <img
@@ -21,49 +21,50 @@
           />
         </a>
         <!-- ALTERAR A CLASSE EM DETERMINADAS PÁGINAS -->
-        <ul class="navbar-header" id="navbar_cadastro">
-          <li class="page-selected"><a href="unidades.html">Unidades</a></li>
+        <ul class="navbar-header">
+          <li class=""><a href="index.html">Home</a></li>
           <hr />
-          <li class=""><a href="cadastro.html">Cadastro</a></li>
+          <li class=""><a href="page_equipe.html">Equipe</a></li>
           <hr />
-          <li class=""><a href="login.html">Sair</a></li>
+          <li class=""><a href="simulador_financeiro.html">Simulador</a></li>
+          <hr />
+          <li class="page-selected"><a href="login.html">Login</a></li>
           <img
-            id="img_theme"
-            onclick="theme_change()"
-            src="assets/imgs/header-footer/sun_off.png"
-            title="Mudar tema"
-            alt="Sol do Tema"
-          />
+          id="img_theme"
+          onclick="theme_change()"
+          src="assets/imgs/header-footer/sun_off.png"
+          title="Mudar tema"
+          alt="Sol do Tema"
+        />
         </ul>
       </div>
-    </div>
+    </header>
 
     <!-- BANNER -->
-    <div class="banner banner-unidades">
-      <div class="container">
-        <!-- CARD DE UNIDADES -->
-        <div class="card-input card-unidades">
-          <h1>UNIDADES</h1>
-          <div class="form-box form-unidades">
-            <div class="form-input form-select-p">
-              <select class="form-select" id="select_unidades">
-                <option value="0">-</option>
-                <option value="1">Unidade 1</option>
-                <option value="2">Unidade 2</option>
-                <option value="3">Unidade 3</option>
-                <option value="4">Unidade 4</option>
-              </select>
+    <div class="container_setor">
+        <div class="row_setor">
+            <div class="item_setor"> 
+                <p class="titulo_setor">Setor 1</p>
+                <p class="texto_setor">Algodão</p>
+                <button type="button" onclick="continuar()" class="botao_setor">Continuar</button>
             </div>
-          </div>
-          <button
-            onclick="carregar_dashboard()"
-            class="form-button form-btn-dashboard"
-            title="Ir para a dashboard"
-          >
-            <a href="setor.html"> SETOR </a>
-          </button>
+            <div class="item_setor">
+                <p class="titulo_setor">Setor 2</p>
+                <p class="texto_setor">Setin</p>
+                <button type="button" onclick="continuar()" class="botao_setor">Continuar</button>
+            </div>
         </div>
-      </div>
+        <div class="row_setor">
+            <div class="item_setor">
+                <p class="titulo_setor">Setor 3</p>
+                <p class="texto_setor">Moleton</p>
+                <button type="button" onclick="continuar()" class="botao_setor">Continuar</button></div>
+            <div class="item_setor">
+                <p class="titulo_setor">Setor 4</p>
+                <p class="texto_setor">Poliester</p>
+                <button type="button" onclick="continuar()" class="botao_setor">Continuar</button></div>
+            
+        </div>
     </div>
 
     <!-- FOOTER -->

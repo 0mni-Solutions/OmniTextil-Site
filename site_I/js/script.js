@@ -92,7 +92,7 @@ function carregar_dashboard() {
     unidade = Number(select_unidades.value);
 
     if (unidade > 0) {
-        alert("Carregando Dashboard");
+        // alert("Carregando Dashboard");
     } else {
         alert("Escolha uma Unidade");
     }
@@ -135,3 +135,5 @@ function cadastrar() {
         alert("Algum campo não foi informado")
     }
 }
+// tela setor
+
