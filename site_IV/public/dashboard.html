@@ -8,16 +8,13 @@
     <link id="link_theme" rel="stylesheet" href="css/theme_dark.css" />
     <title>Dashboard | OMNI Têxtil</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
-    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script> -->
     <link rel="icon" href="assets/imgs/header-footer/logo_imgWHITE.png" />
   </head>
 
-  <body>
+  <body onload='atualizarGrafico()'>
     <!-- HEADER -->
     <header class="header dash-header">
       <div class="container">
@@ -62,7 +59,7 @@
               <div class="div-kpi">
                 <div class="div-dougchart chart-umidade kpi-now">
                   <div class="kpi-title">TEMPO REAL</div>
-                  <div class="kpi-data">51,5%</div>
+                  <div class="kpi-data" id="kpi_umi">51,5%</div>
                 </div>
                 <div class="div-dougchart chart-umidade">
                   <canvas id="UMI_ChartDOUG"></canvas>
@@ -90,7 +87,7 @@
               <div class="div-kpi">
                 <div class="div-dougchart chart-temperatura kpi-now">
                   <div class="kpi-title">TEMPO REAL</div>
-                  <div class="kpi-data">17,0ºC</div>
+                  <div class="kpi-data" id="kpi_temp">17,0ºC</div>
                 </div>
                 <div class="div-dougchart chart-temperatura">
                   <canvas id="TEMP_ChartDOUG"></canvas>
@@ -142,7 +139,7 @@
   </body>
 </html>
 
-<!-- <script src="js/dashboard_body api.js"></script> -->
-<script src="js/dashboard_body.js"></script>
+<script src="js/dashboard_body api.js"></script>
+<!-- <script src="js/dashboard_body.js"></script> -->
 <script src="js/script.js"></script>
 <script src="js/funcoes.js"></script>
