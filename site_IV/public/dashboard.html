@@ -14,7 +14,7 @@
     <link rel="icon" href="assets/imgs/header-footer/logo_imgWHITE.png" />
   </head>
 
-  <body onload='atualizarGrafico()'>
+  <body onload='atualizarGrafico(), obterdados()'>
     <!-- HEADER -->
     <header class="header dash-header">
       <div class="container">
@@ -59,11 +59,11 @@
               <div class="div-kpi">
                 <div class="div-dougchart chart-umidade kpi-now">
                   <div class="kpi-title">TEMPO REAL</div>
-                  <div class="kpi-data" id="kpi_umi">51,5%</div>
+                  <div class="kpi-data" id="kpi_umi">-%</div>
                 </div>
-                <div class="div-dougchart chart-umidade">
+                <!-- <div class="div-dougchart chart-umidade">
                   <canvas id="UMI_ChartDOUG"></canvas>
-                </div>
+                </div> -->
               </div>
               <div class="div-barchart chart-umidade">
                 <canvas id="UMI_ChartBAR"></canvas>
@@ -87,11 +87,11 @@
               <div class="div-kpi">
                 <div class="div-dougchart chart-temperatura kpi-now">
                   <div class="kpi-title">TEMPO REAL</div>
-                  <div class="kpi-data" id="kpi_temp">17,0ºC</div>
+                  <div class="kpi-data" id="kpi_temp">-ºC</div>
                 </div>
-                <div class="div-dougchart chart-temperatura">
+                <!-- <div class="div-dougchart chart-temperatura">
                   <canvas id="TEMP_ChartDOUG"></canvas>
-                </div>
+                </div> -->
               </div>
               <div class="div-barchart chart-temperatura">
                 <canvas id="TEMP_ChartBAR"></canvas>
