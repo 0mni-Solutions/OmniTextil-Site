@@ -6,12 +6,12 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
   if (process.env.AMBIENTE_PROCESSO == "producao") {
     instrucaoSql = `select top ${limite_linhas}
         temperatura, 
-        dht11_umidade as umidade,  
-                        momento,
-                        CONVERT(varchar, momento, 108) as momento_grafico
-                    from medida
-                    where fk_aquario = 1
-                    order by id desc`;
+        umidade,  
+        data_hora,
+            CONVERT(varchar, data_hora, 108) as momento_grafico
+        from Dados
+        where fkSensor = 2
+        order by idDados desc`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
     instrucaoSql = `SELECT 
         fksensor,
@@ -45,9 +45,9 @@ function buscarMedidasSemanais() {
     fkSensor, 
     DATE_FORMAT(data_hora, '%D:%M') 
     AS 
-    momento_grafico from 
-    dados WHERE 
-    fkSensor = 1`;
+    data_hora from 
+    Dados WHERE 
+    fkSensor = 2`;
   } else {
     console.log(
       "\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n"
@@ -64,12 +64,12 @@ function buscarMedidasEmTempoReal(idAquario) {
 
   if (process.env.AMBIENTE_PROCESSO == "producao") {
     instrucaoSql = `select top 1
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        CONVERT(varchar, momento, 108) as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idAquario} 
-                    order by id desc`;
+        temperatura, 
+        umidade,  
+        CONVERT(varchar, data_hora, 108) as momento_grafico, 
+        fkSensor 
+        from Dados where fkSensor = 2 
+    order by idDados desc`;
   } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
     instrucaoSql = `SELECT 
         fksensor,
@@ -97,5 +97,5 @@ function buscarMedidasEmTempoReal(idAquario) {
 module.exports = {
   buscarUltimasMedidas,
   buscarMedidasEmTempoReal,
-  buscarMedidasSemanais
+  buscarMedidasSemanais,
 };
