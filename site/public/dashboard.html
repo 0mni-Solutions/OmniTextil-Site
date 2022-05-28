@@ -8,13 +8,17 @@
     <link id="link_theme" rel="stylesheet" href="css/theme_dark.css" />
     <title>Dashboard | OMNI Têxtil</title>
 
-    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script> -->
+    <!-- <script
+      type="text/javascript"
+      src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"
+    ></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    
     <link rel="icon" href="assets/imgs/header-footer/logo_imgWHITE.png" />
   </head>
 
-  <body onload='atualizarGrafico(), obterdados()'>
+  <body onload="atualizarGrafico(), obterdados()">
     <!-- HEADER -->
     <header class="header dash-header">
       <div class="container">
@@ -28,13 +32,17 @@
         <ul class="navbar-header">
           <li class=""><a href="unidades.html">Unidades</a></li>
           <hr />
-          <li class="" id="li_cadastro"><a href="cadastro.html">Cadastro</a></li>
+          <li class="" id="li_cadastro">
+            <a href="cadastro.html">Cadastro</a>
+          </li>
           <hr id="hr_cadastro" />
-          <li class=""><a onclick="limparSessao()" href="login.html">Sair</a></li>
+          <li class="">
+            <a onclick="limparSessao()" href="login.html">Sair</a>
+          </li>
           <img
             id="img_theme"
             onclick="theme_change()"
-            src="assets/imgs/header-footer/sun_on.png"
+            src=""
             title="Mudar tema"
             alt="Sol do Tema"
           />
@@ -61,14 +69,54 @@
                   <div class="kpi-title">TEMPO REAL</div>
                   <div class="kpi-data" id="kpi_umi">-%</div>
                 </div>
-                <!-- <div class="div-dougchart chart-umidade">
-                  <canvas id="UMI_ChartDOUG"></canvas>
-                </div> -->
               </div>
               <div class="div-barchart chart-umidade">
-                <canvas id="UMI_ChartBAR"></canvas>
+                <div class="quadrado" style="background-color: #f10652;">
+                  <p class="medicao">
+                    40%
+                  </p>
+                  <div class="status">
+                    MUITO BAIXO
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #ff7800;">
+                  <p class="medicao">
+                    45%
+                  </p>
+                  <div class="status">
+                    PERIGO
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #31bd29;">
+                  <p class="medicao">
+                    50%
+                  </p>
+                  <div class="status">
+                    IDEAL
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #ff7800;">
+                  <p class="medicao">
+                    55%
+                  </p>
+                  <div class="status">
+                    PERIGO
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #f10652;">
+                  <p class="medicao">
+                    60%
+                  </p>
+                  <div class="status">
+                    MUITO ALTO
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+          <div id="alert_umi" class="card-alert">
+            <img id="img_umi" src="assets/imgs/umidade.png" />
+            <p id="p_umi"></p>
           </div>
         </div>
       </div>
@@ -89,14 +137,54 @@
                   <div class="kpi-title">TEMPO REAL</div>
                   <div class="kpi-data" id="kpi_temp">-ºC</div>
                 </div>
-                <!-- <div class="div-dougchart chart-temperatura">
-                  <canvas id="TEMP_ChartDOUG"></canvas>
-                </div> -->
               </div>
               <div class="div-barchart chart-temperatura">
-                <canvas id="TEMP_ChartBAR"></canvas>
+                <div class="quadrado" style="background-color: #f1065299;">
+                  <p class="medicao">
+                    0ºC
+                  </p>
+                  <div class="status">
+                    MUITO BAIXO
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #ff780099;">
+                  <p class="medicao">
+                    10ºC
+                  </p>
+                  <div class="status">
+                    PERIGO
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #31bd2999;">
+                  <p class="medicao">
+                    20ºC
+                  </p>
+                  <div class="status">
+                    IDEAL
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #ff780099;">
+                  <p class="medicao">
+                    30ºC
+                  </p>
+                  <div class="status">
+                    PERIGO
+                  </div>
+                </div>
+                <div class="quadrado" style="background-color: #f1065299;">
+                  <p class="medicao">
+                    40ºC
+                  </p>
+                  <div class="status">
+                    MUITO ALTO
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+          <div id="alert_temp" class="card-alert">
+            <img id="img_temp" src="assets/imgs/temperatura.png" />
+            <p id="p_temp"></p>
           </div>
         </div>
       </div>
@@ -109,13 +197,17 @@
         <div class="box contato">
           <h4>Contato</h4>
           <hr />
-          
           <h5>
             <img
               src="assets/imgs/header-footer/logo_email.png"
               alt="email"
             />support@omnisolutions.zohodesk.com
           </h5>
+        </div>
+        <div>
+          <a href="assets/Manual.pdf" download title="MANUAL DE INSTALAÇÃO">
+            <img src="assets/documento.png" alt="Manual">
+          </a>
         </div>
         <!-- BOX DA OMNI SOLUTIONS -->
         <div class="box">

@@ -2,7 +2,7 @@ var medidaModel = require("../models/medidaModel");
 
 function buscarUltimasMedidas(req, res) {
 
-    const limite_linhas = 7;
+    const limite_linhas = 20;
 
     var idAquario = req.params.idAquario;
 
@@ -59,9 +59,43 @@ function buscarMedidasEmTempoReal(req, res) {
     });
 }
 
+function pegarHistorico(req, res) {
+    let tipoUmidade = req.body.nomeServer;
+    let escalaUmidade = req.body.nivelUServer;
+    let tipoTemperatura = req.body.emailServer;                
+    let escalaTemperatura = req.body.nivelTServer;
+
+    if (tipoUmidade == undefined) {
+        res.status(400).send("O tipoUmidade está undefined!");
+    } else if (escalaUmidade == undefined) {
+        res.status(400).send("A escala da umidade está undefined!");
+    } else if (temperatura == undefined) {
+        res.status(400).send("O tipoTemperatura está undefined!");
+    } else if (escalaTemperatura == undefined) {
+        res.status(400).send("A escala da temperatura está undefined!");
+    } else {
+        
+        medidaModel.getHistorico(tipoUmidade, escalaUmidade, tipoTemperatura, escalaTemperatura)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao inserir os analytics! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
-    buscarMedidasSemanais
-
+    buscarMedidasSemanais,
+    pegarHistorico,
 }

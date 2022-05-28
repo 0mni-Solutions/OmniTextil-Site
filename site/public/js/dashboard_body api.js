@@ -1,8 +1,7 @@
 let proximaAtualizacao;
 
-(window.onload = obterDadosGrafico(1)), obterDadosSemanais(1), obterdados(1);
-
-verificar_autenticacao();
+(window.onload = obterDadosGrafico(sessionStorage.ID_SETOR)),
+  obterdados(sessionStorage.ID_SETOR);
 
 // O gráfico é construído com três funções:
 // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
@@ -15,19 +14,19 @@ verificar_autenticacao();
 
 //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
 //     Para ajustar o "select", ajuste o comando sql em src/models
-function obterDadosGrafico(idAquario) {
+function obterDadosGrafico(idSetor) {
   if (proximaAtualizacao != undefined) {
     clearTimeout(proximaAtualizacao);
   }
 
-  fetch(`/medidas/ultimas/${idAquario}`, { cache: "no-store" })
+  fetch(`/medidas/ultimas/${idSetor}`, { cache: "no-store" })
     .then(function (response) {
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
           resposta.reverse();
 
-          plotarGrafico(resposta, idAquario);
+          plotarGrafico(resposta, idSetor);
         });
       } else {
         console.error("Nenhum dado encontrado ou erro na API");
@@ -48,7 +47,7 @@ function obterDadosSemanais(idAquario) {
           console.log(`Dados recebidos: ${JSON.stringify(respostaSemanal)}`);
           respostaSemanal.reverse();
 
-          plotarGrafico(resposta,respostaSemanal,idAquario);
+          plotarGrafico(resposta, respostaSemanal, idAquario);
         });
       } else {
         console.error("Nenhum dado encontrado ou erro na API");
@@ -82,48 +81,23 @@ function obterdados(idAquario) {
 // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
 // Configura o gráfico (cores, tipo, etc), materializa-o na página e,
 // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-
-function plotarGrafico(resposta,respostaSemanal, idAquario) {
+var configUMI = {};
+var umiChart;
+var configTEMP = {};
+var tempChart;
+function plotarGrafico(resposta, idAquario) {
   console.log("iniciando plotagem do gráfico...");
-
-  var DadosSemanais = {
-    labels: [],
-    datasets: [
-      {
-        yAxisID: "y-umidade",
-        label: "Umidade Semanal",
-        fill: true,
-        borderColor: "#8008FF",
-        backgroundColor: "#8008FF",
-        fill: true,
-        data: [],
-      },
-    ],
-  };
-  var DadosSemanaisTemp = {
-    labels: [],
-    datasets: [
-      {
-        yAxisID: "y-temperatura",
-        label: "Temperatura Semanal",
-        fill: true,
-        borderColor: "#8008FF",
-        backgroundColor: "#8008FF",
-        fill: true,
-        data: [],
-      },
-    ],
-  };
 
   var dados = {
     labels: [],
     datasets: [
       {
-        yAxisID: "y-umidade",
         label: "Umidade",
         fill: true,
         borderColor: "#8008FF",
-        backgroundColor: "#8008FF",
+        backgroundColor: "#8008FF20",
+        tension: 0.3,
+        pointRadius: 5,
         fill: true,
         data: [],
       },
@@ -134,11 +108,12 @@ function plotarGrafico(resposta,respostaSemanal, idAquario) {
     labels: [],
     datasets: [
       {
-        yAxisID: "y-temperatura",
         label: "Temperatura",
         fill: true,
-        borderColor: "#8008FF",
-        backgroundColor: "#8008FF",
+        backgroundColor: "#D7B1FF20",
+        borderColor: "#D7B1FF",
+        tension: 0.3,
+        pointRadius: 5,
         fill: true,
         data: [],
       },
@@ -152,154 +127,309 @@ function plotarGrafico(resposta,respostaSemanal, idAquario) {
     dados.datasets[0].data.push(registro.umidade);
     dadosTemp.datasets[0].data.push(registro.temperatura);
   }
-  for (i = 0; i < respostaSemanal.length; i++) {
-    var registro = respostaSemanal[i];
-    DadosSemanais.labels.push(registro.momento_grafico);
-    DadosSemanaisTemp.datasets[0].data.push(registro.umidade);
-    DadosSemanaisTemp.datasets[0].data.push(registro.temperatura);
-  }
-
   console.log(JSON.stringify(dados));
-  // umidade
 
-  // umi bar
-  var ctx = UMI_ChartBAR.getContext("2d");
-  console.log(ctx);
-  window.grafico_linha = Chart.Line(ctx, {
-    data: DadosSemanais,
-    options: {
-      responsive: true,
-      animation: { duration: 500 },
-      hoverMode: "index",
-      stacked: false,
-      title: {
-        display: false,
-        text: "Dados capturados",
+  let delayed;
+  // UMI
+  const settingsUMI = {
+    maintainAspectRatio: false,
+    responsive: true,
+
+    // ANIMAÇÃO (RETIRAR)
+    animation: {
+      onComplete: () => {
+        delayed = true;
       },
-      scales: {
-        yAxes: [
-          {
-            type: "bar",
-            display: true,
-            position: "left",
-            id: "y-umidade",
-            ticks: {
-              beginAtZero: true,
-              max: 100,
-              min: 0,
-            },
-
-            gridLines: {
-              drawOnChartArea: false,
-            },
-          },
-        ],
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === "data" && context.mode === "default" && !delayed) {
+          delay = context.dataIndex * 55 + context.datasetIndex * 100;
+        }
+        return delay;
       },
     },
-  });
-
-  // umi line
-  var ctx = UMI_ChartLINE.getContext("2d");
-  console.log(ctx);
-  window.grafico_linha = Chart.Line(ctx, {
+    // PARTE SUPERIOR
+    plugins: {
+      // TÍTULO NO GRÁFICO
+      title: {
+        display: true,
+        padding: 0,
+        text: "TEMPO REAL",
+        color: "#5E2D92",
+        font: {
+          size: 30,
+          family: "Quicksand_Bold",
+        },
+      },
+      // SUBTÍTULO NO GRÁFICO
+      subtitle: {
+        display: true,
+        padding: 20,
+        text: "| HOJE |",
+        color: "#5E2D92",
+        font: {
+          size: 15,
+          family: "Quicksand_Bold",
+        },
+      },
+      // LEGENDA DOS DATASETS
+      legend: {
+        display: true,
+        labels: {
+          boxHeight: 3,
+          boxWidth: 22,
+          color: "#5E2D92",
+          font: {
+            size: 20,
+            family: "Quicksand_Bold",
+          },
+        },
+      },
+      // TOOLTIP
+      tooltip: {
+        enabled: true,
+        displayColors: false,
+        backgroundColor: "rgba(67, 27, 109, 0.9)",
+        caretSize: 12,
+        caretPadding: 15,
+        padding: 20,
+        cornerRadius: 20,
+        titleAlign: "center",
+        titleColor: "#e2c6ff",
+        titleFont: {
+          size: 15,
+          family: "Quicksand_Book",
+          style: "italic",
+        },
+        titleMarginBottom: 10,
+        bodyAlign: "center",
+        bodyColor: "white",
+        bodyFont: {
+          size: 15,
+          family: "Quicksand_Bold",
+        },
+      },
+    },
+    // LEGENDAS
+    scales: {
+      // DIMENSÕES (X-AXIS)
+      x: {
+        grid: {
+          color: '#ac79e2',
+        },
+        // TITLE DO EIXO X
+        title: {
+          display: true,
+          text: "Horário",
+          color: "#1e0935",
+          font: {
+            size: 20,
+            family: "Quicksand_Bold",
+            style: "italic",
+          },
+        },
+        // ESTILO DAS DIMENSÕES
+        ticks: {
+          maxRotation: 90,
+          minRotation: 60,
+          color: "#1e0935",
+          font: {
+            size: 13,
+            family: "Quicksand_Bold",
+          },
+        },
+      },
+      // MÉTRICAS (Y-AXIS)
+      y: {
+        grid: {
+          color: '#ac79e2',
+        },
+        // TITLE DO EIXO Y
+        title: {
+          display: true,
+          text: "Porcentagem",
+          color: "#1e0935",
+          font: {
+            size: 20,
+            family: "Quicksand_Bold",
+            style: "italic",
+          },
+        },
+        // ESTILO DAS DIMENSÕES
+        min: 0,
+        max: 100,
+        ticks: {
+          stepSize: 10,
+          color: "#1e0935",
+          font: {
+            size: 15,
+            family: "Quicksand_Bold",
+            style: "italic",
+          },
+          callback: function (value) {
+            return +value + "%";
+          },
+        },
+      },
+    },
+  };
+  configUMI = {
+    type: "line",
     data: dados,
-    options: {
-      responsive: true,
-      animation: { duration: 500 },
-      hoverMode: "index",
-      stacked: false,
-      title: {
-        display: false,
-        text: "Dados capturados",
-      },
-      scales: {
-        yAxes: [
-          {
-            type: "linear",
-            display: true,
-            position: "left",
-            id: "y-umidade",
-            ticks: {
-              beginAtZero: true,
-              max: 100,
-              min: 0,
-            },
+    options: settingsUMI,
+  };
 
-            gridLines: {
-              drawOnChartArea: false,
-            },
-          },
-        ],
+  umiChart = new Chart(document.getElementById("UMI_ChartLINE"), configUMI);
+
+  // TEMP
+  const settingsTEMP = {
+    maintainAspectRatio: false,
+    responsive: true,
+
+    // ANIMAÇÃO (RETIRAR)
+    animation: {
+      onComplete: () => {
+        delayed = true;
+      },
+      delay: (context) => {
+        let delay = 0;
+        if (context.type === "data" && context.mode === "default" && !delayed) {
+          delay = context.dataIndex * 55 + context.datasetIndex * 100;
+        }
+        return delay;
       },
     },
-  });
-  // temp
-  // umi bar
-  var ctx = TEMP_ChartBAR.getContext("2d");
-  window.grafico_linhaTemp = Chart.Line(ctx, {
-    data: DadosSemanaisTemp,
-    options: {
-      responsive: true,
-      animation: { duration: 500 },
-      hoverMode: "index",
-      stacked: false,
+    // PARTE SUPERIOR
+    plugins: {
+      // TÍTULO NO GRÁFICO
       title: {
-        display: false,
-        text: "Dados capturados",
+        display: true,
+        padding: 0,
+        text: "TEMPO REAL",
+        color: "#bf6bff",
+        font: {
+          size: 30,
+          family: "Quicksand_Bold",
+        },
       },
-      scales: {
-        yAxes: [
-          {
-            type: "bar",
-            display: true,
-            position: "left",
-            id: "y-temperatura",
-            ticks: {
-              beginAtZero: true,
-              max: 60,
-              min: 0,
-            },
-            gridLines: {
-              drawOnChartArea: false,
-            },
+      // SUBTÍTULO NO GRÁFICO
+      subtitle: {
+        display: true,
+        padding: 20,
+        text: "| HOJE |",
+        color: "#bf6bff",
+        font: {
+          size: 15,
+          family: "Quicksand_Bold",
+        },
+      },
+      // LEGENDA DOS DATASETS
+      legend: {
+        display: true,
+        labels: {
+          boxHeight: 3,
+          boxWidth: 22,
+          color: "#bf6bff",
+          font: {
+            size: 20,
+            family: "Quicksand_Bold",
           },
-        ],
+        },
+      },
+      // TOOLTIP
+      tooltip: {
+        enabled: true,
+        displayColors: false,
+        backgroundColor: "rgba(226, 198, 255, 0.9)",
+        caretSize: 12,
+        caretPadding: 15,
+        padding: 20,
+        cornerRadius: 20,
+        titleAlign: "center",
+        titleColor: "#8008FF",
+        titleFont: {
+          size: 15,
+          family: "Quicksand_Book",
+          style: "italic",
+        },
+        titleMarginBottom: 10,
+        bodyAlign: "center",
+        bodyColor: "#5E2D92",
+        bodyFont: {
+          size: 15,
+          family: "Quicksand_Bold",
+        },
       },
     },
-  });
-  // umi line
-  var ctx = TEMP_ChartLINE.getContext("2d");
-  window.grafico_linhaTemp = Chart.Line(ctx, {
+    // LEGENDAS
+    scales: {
+      // DIMENSÕES (X-AXIS)
+      x: {
+        grid: {
+          color: '#41334f',
+        },
+        // TITLE DO EIXO X
+        title: {
+          display: true,
+          text: "Horário",
+          color: "#D7B1FF",
+          font: {
+            size: 20,
+            family: "Quicksand_Bold",
+            style: "italic",
+          },
+        },
+        // ESTILO DAS DIMENSÕES
+        ticks: {
+          maxRotation: 90,
+          minRotation: 60,
+          color: "#D7B1FF",
+          font: {
+            size: 13,
+            family: "Quicksand_Bold",
+          },
+        },
+      },
+      // MÉTRICAS (Y-AXIS)
+      y: {
+        grid: {
+          color: '#41334f',
+        },
+        // TITLE DO EIXO Y
+        title: {
+          display: true,
+          text: "Graus Celsius",
+          color: "#D7B1FF",
+          font: {
+            size: 20,
+            family: "Quicksand_Bold",
+            style: "italic",
+          },
+        },
+        // ESTILO DAS DIMENSÕES
+        min: 0,
+        max: 40,
+        ticks: {
+          stepSize: 5,
+          color: "#D7B1FF",
+          font: {
+            size: 15,
+            family: "Quicksand_Bold",
+            style: "italic",
+          },
+          callback: function (value) {
+            return +value + "ºC";
+          },
+        },
+      },
+    },
+  };
+  configTEMP = {
+    type: "line",
     data: dadosTemp,
-    options: {
-      responsive: true,
-      animation: { duration: 500 },
-      hoverMode: "index",
-      stacked: false,
-      title: {
-        display: false,
-        text: "Dados capturados",
-      },
-      scales: {
-        yAxes: [
-          {
-            type: "linear",
-            display: true,
-            position: "left",
-            id: "y-temperatura",
-            ticks: {
-              beginAtZero: true,
-              max: 60,
-              min: 0,
-            },
-            gridLines: {
-              drawOnChartArea: false,
-            },
-          },
-        ],
-      },
-    },
-  });
+    options: settingsTEMP,
+  };
+  tempChart = new Chart(document.getElementById("TEMP_ChartLINE"), configTEMP);
 
   setTimeout(() => atualizarGrafico(idAquario, dados, dadosTemp), 2000);
 }
@@ -329,8 +459,8 @@ function atualizarGrafico(idAquario, dados, dadosTemp) {
           dadosTemp.datasets[0].data.shift(); // apagar o primeiro de temperatura
           dadosTemp.datasets[0].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
 
-          window.grafico_linha.update();
-          window.grafico_linhaTemp.update();
+          umiChart.update();
+          tempChart.update();
 
           // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
           proximaAtualizacao = setTimeout(
@@ -356,62 +486,78 @@ function atualizarGrafico(idAquario, dados, dadosTemp) {
 // cards
 
 function alertar(temperatura, umidade) {
-  var limites = {
-    muito_quente: 23,
-    quente: 22,
-    ideal: 20,
-    frio: 10,
-    muito_frio: 5,
+  const limitesUmi = {
+    maxPerigo: 60,
+    max: 55,
+    ideal: 50,
+    min: 45,
+    minPerigo: 40,
   };
-  var limitesUmi = {
-    max: 23,
-    meioMax: 22,
+  const limitesTemp = {
+    maxPerigo: 40,
+    max: 30,
     ideal: 20,
-    meioMin: 10,
-    mix: 5,
+    min: 10,
+    minPerigo: 5,
   };
-
-  if (temperatura >= limites.muito_quente) {
-    classe_temperatura = "cor-alerta perigo-quente";
-    console.log("caiu no 1");
-  } else if (
-    temperatura < limites.muito_quente &&
-    temperatura >= limites.quente
-  ) {
-    classe_temperatura = "cor-alerta alerta-quente";
-    console.log("caiu no 2");
-  } else if (temperatura < limites.quente && temperatura > limites.frio) {
-    classe_temperatura = "cor-alerta ideal";
-    console.log("caiu no 3");
-  } else if (temperatura <= limites.frio && temperatura > limites.muito_frio) {
-    classe_temperatura = "cor-alerta alerta-frio";
-    console.log("caiu no 4");
-  } else if (temperatura < limites.min_temperatura) {
-    classe_temperatura = "cor-alerta perigo-frio";
-    console.log("caiu no 5");
-  }
-
-  if (umidade >= limitesUmi.max) {
-    classe_umidade = "cor-alerta perigo-quente";
-    console.log("caiu no 1");
-  } else if (umidade < limitesUmi.max && umidade >= limitesUmi.meioMax) {
-    classe_umidade = "cor-alerta alerta-quente";
-    console.log("caiu no 2");
-  } else if (umidade < limitesUmi.meioMax && umidade > limitesUmi.meioMin) {
-    classe_umidade = "cor-alerta ideal";
-    console.log("caiu no 3");
-  } else if (umidade <= limitesUmi.frio && umidade > limitesUmi.muito_frio) {
-    classe_umidade = "cor-alerta alerta-frio";
-    console.log("caiu no 4");
-  } else if (umidade < limitesUmi.min_umidade) {
-    classe_umidade = "cor-alerta perigo-frio";
-    console.log("caiu no 5");
-  }
-
   if (temperatura != null) {
     kpi_temp.innerHTML = temperatura + "°C";
   }
   if (umidade != null) {
     kpi_umi.innerHTML = umidade + "%";
+  }
+
+  if (umidade >= limitesUmi.maxPerigo) {
+    p_umi.innerHTML = "ALERTA MÁXIMO: UMIDADE MUITO ALTA";
+    p_umi.style.backgroundColor = "#ff0053";
+    img_umi.style.filter = "hue-rotate(1deg)";
+    alert_umi.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
+  } else if (umidade >= limitesUmi.max) {
+    p_umi.innerHTML = "PERIGO: UMIDADE ALTA";
+    p_umi.style.backgroundColor = "#ff7800";
+    img_umi.style.filter = "hue-rotate(271deg)";
+    alert_umi.style.filter = "drop-shadow(0px 0px 6px #ff7800)";
+  } else if (umidade < limitesUmi.max && umidade > limitesUmi.min) {
+    p_umi.innerHTML = "UMIDADE IDEAL";
+    p_umi.style.backgroundColor = "#31bd29";
+    img_umi.style.filter = "hue-rotate(153deg)";
+    alert_umi.style.filter = "drop-shadow(0px 0px 3px #31bd29)";
+  } else if (umidade >= limitesUmi.minPerigo) {
+    p_umi.innerHTML = "PERIGO: UMIDADE BAIXA";
+    p_umi.style.backgroundColor = "#ff7800";
+    img_umi.style.filter = "hue-rotate(271deg)";
+    alert_umi.style.filter = "drop-shadow(0px 0px 6px #ff7800)";
+  } else if (umidade < limitesUmi.minPerigo) {
+    p_umi.innerHTML = "ALERTA MÁXIMO: UMIDADE MUITO BAIXA";
+    p_umi.style.backgroundColor = "#ff0053";
+    img_umi.style.filter = "hue-rotate(1deg)";
+    alert_umi.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
+  }
+
+  if (temperatura >= limitesTemp.maxPerigo) {
+    p_temp.innerHTML = "ALERTA MÁXIMO: TEMPERATURA MUITO ALTA";
+    p_temp.style.backgroundColor = "#ff0053";
+    img_temp.style.filter = "hue-rotate(1deg)";
+    alert_temp.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
+  } else if (temperatura >= limitesTemp.max) {
+    p_temp.innerHTML = "PERIGO: TEMPERATURA ALTA";
+    p_temp.style.backgroundColor = "#ff7800";
+    img_temp.style.filter = "hue-rotate(271deg)";
+    alert_temp.style.filter = "drop-shadow(0px 0px 15px #ff7800)";
+  } else if (temperatura < limitesTemp.max && temperatura > limitesTemp.min) {
+    p_temp.innerHTML = "TEMPERATURA IDEAL";
+    p_temp.style.backgroundColor = "#31bd29";
+    img_temp.style.filter = "hue-rotate(153deg)";
+    alert_temp.style.filter = "drop-shadow(0px 0px 3px #31bd29)";
+  } else if (temperatura >= limitesTemp.minPerigo) {
+    p_temp.innerHTML = "PERIGO: TEMPERATURA BAIXA";
+    p_temp.style.backgroundColor = "#ff7800";
+    img_temp.style.filter = "hue-rotate(271deg)";
+    alert_temp.style.filter = "drop-shadow(0px 0px 6px #ff7800)";
+  } else if (temperatura < limitesTemp.minPerigo) {
+    p_temp.innerHTML = "ALERTA MÁXIMO: TEMPERATURA MUITO BAIXA";
+    p_temp.style.backgroundColor = "#ff0053";
+    img_temp.style.filter = "hue-rotate(1deg)";
+    alert_temp.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
   }
 }

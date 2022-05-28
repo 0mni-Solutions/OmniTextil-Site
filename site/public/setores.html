@@ -10,7 +10,7 @@
     <link rel="icon" href="assets/imgs/header-footer/logo_imgWHITE.png" />
   </head>
 
-  <body>
+  <body onload="listarSetores()">
           <!-- HEADER -->
     <div class="header">
         <div class="container">
@@ -22,7 +22,7 @@
           </a>
           <!-- ALTERAR A CLASSE EM DETERMINADAS PÁGINAS -->
           <ul class="navbar-header" id="navbar_cadastro">
-            <li class="page-selected"><a href="unidades.html">Unidades</a></li>
+            <li class=""><a href="unidades.html">Unidades</a></li>
             <hr />
             <li class=""><a href="cadastro.html">Cadastro</a></li>
             <hr />
@@ -30,7 +30,7 @@
             <img
               id="img_theme"
               onclick="theme_change()"
-              src="assets/imgs/header-footer/sun_off.png"
+              src=""
               title="Mudar tema"
               alt="Sol do Tema"
             />
@@ -40,46 +40,29 @@
       
           <!-- BANNER -->
           <div class="container_setor">
-              <div class="row_setor">
-                  <div class="item_setor"> 
-                      <p class="titulo_setor">Setor 1</p>
-                      <p class="texto_setor">Algodão</p>
-                      <a href="dashboard.html" type="button" onclick="continuar()" class="botao_setor">Continuar</a>
-                  </div>
-                  <div class="item_setor">
-                      <p class="titulo_setor">Setor 2</p>
-                      <p class="texto_setor">Setin</p>
-                      <a href="dashboard.html" type="button" onclick="continuar()" class="botao_setor">Continuar</a>
-                  </div>
-              </div>
-              <div class="row_setor">
-                  <div class="item_setor">
-                      <p class="titulo_setor">Setor 3</p>
-                      <p class="texto_setor">Moleton</p>
-                      <a href="dashboard.html" type="button" onclick="continuar()" class="botao_setor">Continuar</a>
-                    </div>
-                  <div class="item_setor">
-                      <p class="titulo_setor">Setor 4</p>
-                      <p class="texto_setor">Poliester</p>
-                      <a href="dashboard.html" type="button" onclick="continuar()" class="botao_setor">Continuar</a>
-                    </div>   
-              </div>
+              <div class="row_setor" id="setor_card">
+                <span id="mensagem_erro" style="display: none;"></span>
+                    <!-- INSERÇÃO DOS SETORES -->
           </div>
 
     <!-- FOOTER -->
-    <footer class="footer">
+    <footer class="footer" style="position: absolute; bottom: 0;">
       <div class="container">
         <!-- BOX DE CONTATO -->
         <div class="box contato">
           <h4>Contato</h4>
           <hr />
-          
           <h5>
             <img
               src="assets/imgs/header-footer/logo_email.png"
               alt="email"
             />support@omnisolutions.zohodesk.com
           </h5>
+        </div>
+        <div>
+          <a href="assets/Manual.pdf" download title="MANUAL DE INSTALAÇÃO">
+            <img src="assets/documento.png" alt="Manual">
+          </a>
         </div>
         <!-- BOX DA OMNI SOLUTIONS -->
         <div class="box">
@@ -91,3 +74,4 @@
 </html>
 
 <script src="js/script.js"></script>
+<script src="js/funcoes.js"></script>

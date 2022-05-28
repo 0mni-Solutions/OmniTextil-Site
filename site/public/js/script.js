@@ -1,7 +1,8 @@
 /* SCRIPT DE TODAS AS PÁGINAS */
 
 /* HABILITAR CADASTRO */
-if (typeof li_cadastro != "undefined") { // verifica se o elemento existe (OBRIGATORIAMENTE USA 3 ===)
+if (typeof li_cadastro != "undefined") {
+  // verifica se o elemento existe (OBRIGATORIAMENTE USA 3 ===)
   var permissao = sessionStorage.CARGO_USUARIO;
   if (permissao == "ADMIN") {
     li_cadastro.style.display = "list-item";
@@ -19,29 +20,59 @@ link_theme.href = "css/theme_dark.css";
 img_theme.src = "assets/imgs/header-footer/sun.png";
 
 // definir tema ao carregar a página
-if (sessionStorage.theme == "light") {
+if (sessionStorage.THEME == "light") {
   link_theme.href = "css/theme_light.css";
   img_theme.src = "assets/imgs/header-footer/moon.png";
-  sessionStorage.theme == "light";
-} else if (sessionStorage.theme == "dark") {
+} else if (sessionStorage.THEME == "dark") {
   link_theme.href = "css/theme_dark.css";
   img_theme.src = "assets/imgs/header-footer/sun.png";
-  sessionStorage.theme == "dark";
 } else {
-  sessionStorage.theme = "dark";
+  sessionStorage.THEME = "dark";
 }
 // function para mudar tema ao clicar no Sol;
 function theme_change() {
-  if (sessionStorage.theme == "dark") {
+  if (sessionStorage.THEME == "dark") {
     link_theme.href = "css/theme_light.css";
     img_theme.src = "assets/imgs/header-footer/moon.png";
-    sessionStorage.theme = "light";
+    sessionStorage.THEME = "light";
   } else {
     link_theme.href = "css/theme_dark.css";
     img_theme.src = "assets/imgs/header-footer/sun.png";
-
-    sessionStorage.theme = "dark";
+    sessionStorage.THEME = "dark";
   }
+}
+
+/*------------------------------------------------------------------------------------------------------*/
+/* CONFIRMAR MENU */
+if (typeof div_confirm != "undefined") {
+  div_confirm.style.display = "none";
+}
+function confirmarAction(condicao, idUsuario) {
+  div_confirm.style.display = "flex";
+  if (condicao == "sair") {
+    p_confirm.innerHTML = `Desconectar sua conta?`;
+    button_sim.setAttribute("onclick", `limparSessao()`);
+  } else if (condicao == "excluir") {
+    p_confirm.innerHTML = `Excluir o usuário?`;
+    button_sim.setAttribute("onclick", `removerMembro(${idUsuario})`);
+  } else if (condicao == "editar") {
+    p_confirm.innerHTML = `Editar o usuário?`;
+    button_sim.setAttribute("onclick", `editarUpdate(${idUsuario})`);
+  }
+}
+
+function fecharConfirm() {
+  div_confirm.style.display = "none";
+  // RESET DO CARD DE CADASTRO
+  title_cadastro.innerHTML = "CADASTRO";
+  button_cadastrar.style.display = "flex";
+  button_editar.style.display = "none";
+  // RESET DE INPUTS
+  input_nome.value = "";
+  input_email.value = "";
+  input_senha.value = "";
+  input_confirmar_senha.value = "";
+  select_cargo.value = "VAZIO";
 }
 
 /*------------------------------------------------------------------------------------------------------*/
@@ -97,21 +128,10 @@ function simular() {
 /*------------------------------------------------------------------------------------------------------*/
 
 /* UNIDADES */
-// var unidade = 0;
-
-// function carregar_dashboard() {
-//   unidade = Number(select_unidades.value);
-
-//   if (unidade > 0) {
-//     alert("Carregando Dashboard");
-//   } else {
-//     alert("Escolha uma Unidade");
-//   }
-// }
 
 function carregarUnidades() {
   //aguardar();
-  fetch(`/avisos/listarUnidades/${sessionStorage.getItem('fkEmpresa')}`)
+  fetch(`/avisos/listarUnidades/${sessionStorage.getItem("fkEmpresa")}`)
     .then(function (resposta) {
       if (resposta.ok) {
         if (resposta.status == 204) {
@@ -136,6 +156,7 @@ function carregarUnidades() {
 
             // colocando valores do select no innerHTML
             optionUnidade.innerHTML = unidade.nomeUnidade;
+            optionUnidade.value = unidade.idUnidade;
 
             // adicionando todos à um elemento pai pré-existente
             select.appendChild(optionUnidade);
@@ -153,4 +174,55 @@ function carregarUnidades() {
     });
 }
 
+function unidadeSetor() {
+  sessionStorage.UNIDADE_USUARIO = select_unidades.value;
+  window.location = "setores.html";
+}
 /*------------------------------------------------------------------------------------------------------*/
+function listarSetores() {
+  //aguardar();
+  fetch(`/avisos/listarSetores/${sessionStorage.UNIDADE_USUARIO}`)
+    .then(function (resposta) {
+      if (resposta.ok) {
+        if (resposta.status == 204) {
+          var setorCard = document.getElementById("setor_card");
+          var mensagem = document.createElement("mensagem_erro");
+          mensagem.innerHTML = "-";
+          mensagem.value = "0";
+          setorCard.appendChild(mensagem);
+          throw "Nenhum resultado encontrado!!";
+        }
+        resposta.json().then(function (resposta) {
+          console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+          var setorCard = document.getElementById("setor_card");
+          setorCard.innerHTML = "";
+          for (let i = 0; i < resposta.length; i++) {
+            var setor = resposta[i];
+
+            // adicionando todos à um elemento pai pré-existente
+            setorCard.innerHTML += `
+          <div class="item_setor"> 
+            <p class="titulo_setor">${setor.nomeSetor}</p>
+            <p class="texto_setor">${setor.descricao}</p>
+            <button type="button" onclick="continuar('${setor.idSetor}')" class="botao_setor">Continuar</button>
+            </div>
+            `;
+          }
+
+          // finalizarAguardar();
+        });
+      } else {
+        throw "Houve um erro na API!";
+      }
+    })
+    .catch(function (resposta) {
+      console.error(resposta);
+      finalizarAguardar();
+    });
+}
+
+function continuar(id) {
+  sessionStorage.ID_SETOR = id;
+  window.location = "dashboard.html";
+}

@@ -5,16 +5,16 @@ function listar(fkEmpresa) {
     var instrucao = `
             SELECT
             Comum.idUsuario,
-            Admin.nome as nomeAdmin,
-            Comum.nome,
+            Admin.nomeUsuario as nomeAdmin,
+            Comum.nomeUsuario,
             Comum.email,
             Comum.cargo,
-            DATE_FORMAT(Comum.dtCadastro, '%d/%m/%Y %h:%m') as dtCadastro 
+            CONVERT(varchar, Comum.cadastroUsuario, 108) as cadastroUsuario 
         FROM Usuario as Comum
         JOIN Usuario as Admin 
         ON Admin.idUsuario = Comum.fkAdmin
         WHERE Admin.fkEmpresa = ${fkEmpresa}
-        ORDER BY dtCadastro DESC;
+        ORDER BY cadastroUsuario DESC;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -24,6 +24,7 @@ function listarUnidades(fkEmpresa) {
     console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
     var instrucao = `
         SELECT 
+            idUnidade,
             nomeUnidade
         FROM Unidade
         WHERE fkEmpresa = ${fkEmpresa};
@@ -31,6 +32,19 @@ function listarUnidades(fkEmpresa) {
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
+
+function listarSetores(fkUnidade) {
+    console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+    var instrucao = `
+    SELECT * FROM Setor 
+	    JOIN Unidade on idUnidade = fkUnidade
+	    	JOIN Localidade on idLocalidade = fkLocalidade 
+	    		WHERE fkUnidade = ${fkUnidade};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 
 function pesquisarDescricao(texto) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDescricao():");
@@ -83,10 +97,31 @@ function publicar(titulo, descricao, idUsuario) {
     return database.executar(instrucao);
 }
 
-function editar(novaDescricao, idAviso) {
-    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", novaDescricao, idAviso);
+function editarList(idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function editar(): ", idUsuario);
     var instrucao = `
-        UPDATE aviso SET descricao = '${novaDescricao}' WHERE id = ${idAviso};
+            SELECT
+            Comum.idUsuario as idUser,
+            Comum.nomeUsuario,
+            Comum.email,
+            Comum.senha,
+            Comum.cargo
+        FROM Usuario as Comum
+        WHERE Comum.idUsuario = ${idUsuario};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function editarUpdate(idUsuario, nome, email, senha, cargo) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", idUsuario, nome, email, senha, cargo);
+    var instrucao = `
+        UPDATE usuario SET 
+        nomeUsuario = '${nome}', 
+        email = '${email}', 
+        senha = '${senha}', 
+        cargo = '${cargo}' 
+        WHERE idUsuario = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -105,9 +140,11 @@ function deletar(idUsuario) {
 module.exports = {
     listar,
     listarUnidades,
+    listarSetores,
     listarPorUsuario,
     pesquisarDescricao,
     publicar,
-    editar,
-    deletar
+    editarList,
+    editarUpdate,
+    deletar,
 }

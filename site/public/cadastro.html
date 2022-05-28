@@ -14,7 +14,7 @@
     <!-- HEADER -->
     <div class="header">
       <div class="container">
-        <a onclick="limparSessao()" href="index.html" class="href-title">
+        <a onclick="confirmarAction('sair')" class="href-title" title="Página principal">
           <img
             src="assets/imgs/header-footer/logo-OMNI_Textil.png"
             alt="OMNI TÊXTIL"
@@ -27,12 +27,12 @@
           <li class="page-selected"><a href="cadastro.html">Cadastro</a></li>
           <hr />
           <li class="">
-            <a onclick="limparSessao()" href="login.html">Sair</a>
+            <a onclick="confirmarAction('sair')">Sair</a>
           </li>
           <img
             id="img_theme"
             onclick="theme_change()"
-            src="assets/imgs/header-footer/sun_on.png"
+            src=""
             title="Mudar tema"
             alt="Sol do Tema"
           />
@@ -45,7 +45,7 @@
       <div class="container">
         <!-- CARD CADASTRO -->
         <div class="card-input card-cadastro">
-          <h1>CADASTRO</h1>
+          <h1 id="title_cadastro">CADASTRO</h1>
           <div class="form-box form-cadastro">
             <div class="form-input">
               <p>Nome:</p>
@@ -73,10 +73,21 @@
             </div>
             <button
               onclick="cadastrar()"
+              id="button_cadastrar"
               class="form-button"
               title="Cadastrar usuário"
+              style="display: flex"
             >
               entrar
+            </button>
+            <button
+              onclick="editarUpdate()"
+              id="button_editar"
+              class="form-button"
+              title="Editar usuário"
+              style="display: none"
+            >
+              editar
             </button>
           </div>
           <!-- ALERTA DE ERRO -->
@@ -118,6 +129,17 @@
       </div>
     </div>
 
+    <!-- CONFIRMAÇÃO -->
+    <div id="div_confirm" class="div-confirm">
+      <div class="div-buttons">
+        <p id="p_confirm"></p>
+        <button onclick="" id="button_sim" class="form-button">
+          sim
+        </button>
+        <button onclick="fecharConfirm()" class="form-button">não</button>
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
@@ -125,13 +147,17 @@
         <div class="box contato">
           <h4>Contato</h4>
           <hr />
-          
           <h5>
             <img
               src="assets/imgs/header-footer/logo_email.png"
               alt="email"
             />support@omnisolutions.zohodesk.com
           </h5>
+        </div>
+        <div>
+          <a href="assets/Manual.pdf" download title="MANUAL DE INSTALAÇÃO">
+            <img src="assets/documento.png" alt="Manual">
+          </a>
         </div>
         <!-- BOX DA OMNI SOLUTIONS -->
         <div class="box">
