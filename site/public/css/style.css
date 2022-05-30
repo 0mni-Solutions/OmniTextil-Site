@@ -1024,3 +1024,14 @@ body {
   width: 100%;
   font-size: 30px !important;
 }
+.countMedida {
+  width: 26px !important;
+  border: 0 !important;
+  margin: 0 !important;
+  font-size: 40px !important;
+  margin-bottom: 0px !important;
+  margin-top: -70px !important;
+  margin-left: 21px !important;
+  color: red !important;
+  font-weight: 1000;
+}

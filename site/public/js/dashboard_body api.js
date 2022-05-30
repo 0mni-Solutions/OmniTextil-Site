@@ -485,6 +485,16 @@ function atualizarGrafico(idAquario, dados, dadosTemp) {
 
 // cards
 
+let maxUmi = 0;
+let medHUmi = 0;
+let medLUmi = 0;
+let minUmi = 0;
+
+let maxTemp = 0;
+let medHTemp = 0;
+let medLTemp = 0;
+let minTemp = 0;
+
 function alertar(temperatura, umidade) {
   const limitesUmi = {
     maxPerigo: 60,
@@ -512,11 +522,15 @@ function alertar(temperatura, umidade) {
     p_umi.style.backgroundColor = "#ff0053";
     img_umi.style.filter = "hue-rotate(1deg)";
     alert_umi.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
+    maxUmi++;
+    countMaxUmi.innerHTML = `${maxUmi}`;
   } else if (umidade >= limitesUmi.max) {
     p_umi.innerHTML = "PERIGO: UMIDADE ALTA";
     p_umi.style.backgroundColor = "#ff7800";
     img_umi.style.filter = "hue-rotate(271deg)";
     alert_umi.style.filter = "drop-shadow(0px 0px 6px #ff7800)";
+    medHUmi++;
+    countMedHUmi.innerHTML = `${medHUmi}`;
   } else if (umidade < limitesUmi.max && umidade > limitesUmi.min) {
     p_umi.innerHTML = "UMIDADE IDEAL";
     p_umi.style.backgroundColor = "#31bd29";
@@ -527,23 +541,31 @@ function alertar(temperatura, umidade) {
     p_umi.style.backgroundColor = "#ff7800";
     img_umi.style.filter = "hue-rotate(271deg)";
     alert_umi.style.filter = "drop-shadow(0px 0px 6px #ff7800)";
+    medLUmi++;
+    countMedLUmi.innerHTML = `${medLUmi}`;
   } else if (umidade < limitesUmi.minPerigo) {
     p_umi.innerHTML = "ALERTA MÁXIMO: UMIDADE MUITO BAIXA";
     p_umi.style.backgroundColor = "#ff0053";
     img_umi.style.filter = "hue-rotate(1deg)";
     alert_umi.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
+    minUmi++;
+    countMinUmi.innerHTML = `${minUmi}`;
   }
 
   if (temperatura >= limitesTemp.maxPerigo) {
     p_temp.innerHTML = "ALERTA MÁXIMO: TEMPERATURA MUITO ALTA";
     p_temp.style.backgroundColor = "#ff0053";
     img_temp.style.filter = "hue-rotate(1deg)";
+    maxTemp++;
+    countMaxTemp.innerHTML = `${maxTemp}`;
     alert_temp.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
   } else if (temperatura >= limitesTemp.max) {
     p_temp.innerHTML = "PERIGO: TEMPERATURA ALTA";
     p_temp.style.backgroundColor = "#ff7800";
     img_temp.style.filter = "hue-rotate(271deg)";
     alert_temp.style.filter = "drop-shadow(0px 0px 15px #ff7800)";
+    medHTemp++;
+    countMedHTemp.innerHTML = `${medHTemp}`;
   } else if (temperatura < limitesTemp.max && temperatura > limitesTemp.min) {
     p_temp.innerHTML = "TEMPERATURA IDEAL";
     p_temp.style.backgroundColor = "#31bd29";
@@ -554,10 +576,14 @@ function alertar(temperatura, umidade) {
     p_temp.style.backgroundColor = "#ff7800";
     img_temp.style.filter = "hue-rotate(271deg)";
     alert_temp.style.filter = "drop-shadow(0px 0px 6px #ff7800)";
+    medLTemp++;
+    countMedLTemp.innerHTML = `${medLTemp}`;
   } else if (temperatura < limitesTemp.minPerigo) {
     p_temp.innerHTML = "ALERTA MÁXIMO: TEMPERATURA MUITO BAIXA";
     p_temp.style.backgroundColor = "#ff0053";
     img_temp.style.filter = "hue-rotate(1deg)";
     alert_temp.style.filter = "drop-shadow(0px 0px 15px ##ff0053)";
+    minTemp++;
+    countMinTemp.innerHTML = `${minTemp}`;
   }
 }
